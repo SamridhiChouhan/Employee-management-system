@@ -329,7 +329,7 @@ const admin = [
   {
     id: 1,
     email: "admin@example.com",
-    name: "admin1",
+    firstname: "admin1",
     password: "123",
   },
 ];

@@ -24,7 +24,7 @@ const App = () => {
       setUser(userData.role);
       setLoggedInUserData(userData.data);
     }
-  });
+  }, []);
 
   const handleLogin = (email, password) => {
     if (email == "admin@example.com") {
