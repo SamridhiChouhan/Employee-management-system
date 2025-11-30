@@ -12,8 +12,10 @@ import { AuthContext } from "./context/AuthProvider";
 const App = () => {
   const [user, setUser] = useState("");
   const [loggedInUserData, setLoggedInUserData] = useState("");
-  const authData = useContext(AuthContext);
-  console.log(authData.employees);
+  // const authData = useContext(AuthContext);
+  const [userData, setUserData] = useContext(AuthContext);
+
+  // console.log(authData.employees);
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("loggedInUser");
@@ -30,8 +32,8 @@ const App = () => {
     if (email == "admin@example.com") {
       setUser("admin");
       localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
-    } else if (authData) {
-      const employee = authData.employees.find(
+    } else if (userData) {
+      const employee = userData.find(
         (e) => email == e.email && password == e.password
       );
 
@@ -52,9 +54,9 @@ const App = () => {
     <>
       {!user ? <Login handleLogin={handleLogin} /> : ""}
       {user == "admin" ? (
-        <AdminDashboard />
+        <AdminDashboard changeUser={setUser} />
       ) : user == "employee" ? (
-        <EmployeeDashboard data={loggedInUserData} />
+        <EmployeeDashboard data={loggedInUserData} changeUser={setUser} />
       ) : null}
     </>
   );
